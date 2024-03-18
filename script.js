@@ -51,6 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const wordElement = document.createElement("h2");
     wordElement.textContent = word;
 
+    // Pronunciation button
+    const pronounceButton = document.createElement("button");
+    pronounceButton.textContent = "Pronounce";
+    pronounceButton.addEventListener("click", function () {
+      pronounceWord(word);
+    });
+
     const meaningElement = document.createElement("p");
     meaningElement.textContent = meaning;
 
@@ -60,10 +67,18 @@ document.addEventListener("DOMContentLoaded", function () {
     flashcard.appendChild(deleteButton);
     flashcard.appendChild(numberElement);
     flashcard.appendChild(wordElement);
+    flashcard.appendChild(pronounceButton); // Add pronounce button
     flashcard.appendChild(meaningElement);
     flashcard.appendChild(exampleElement);
 
     return flashcard;
+  }
+
+  // Function to pronounce a word
+  function pronounceWord(word) {
+    const speechSynthesis = window.speechSynthesis;
+    const speechUtterance = new SpeechSynthesisUtterance(word);
+    speechSynthesis.speak(speechUtterance);
   }
 
   function saveFlashCards() {
